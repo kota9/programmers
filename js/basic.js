@@ -36,3 +36,4 @@ console.log(swappedString); // 결과: "hELLO, wORLD!"
 
 let anotherString = "jAVAsCRIPT is fUN";
 console.log(swapCase(anotherString)); // 결과: "Javascript IS Fun"
+
