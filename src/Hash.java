@@ -1,23 +1,22 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 // 해시 문제
-public class HashExam {
+public class Hash {
     public static void main(String[] args) {
-        HashExam he = new HashExam();
+        Hash hash = new Hash();
 
         // 완주하지 못한 선수
 //        String[] participant = new String[]{"leo", "kiki", "eden"};
 //        String[] completion = new String[]{"kiki", "eden"};
 //        String[] participant = new String[]{"mislav", "stanko", "mislav", "ana"};
 //        String[] completion = new String[]{"stanko", "ana", "mislav"};
-//        System.out.println(he.solution(participant, completion));
+//        System.out.println(hash.solution(participant, completion));
 
         // 폰켓몬
 //        int[] nums = new int[]{3,1,2,3};
 //        int[] nums = new int[]{3,3,3,2,2,4};
         int[] nums = new int[]{3,3,3,2,2,2};
-        System.out.println(he.solution2(nums));
+        System.out.println(hash.solution2(nums));
 
 
     }
