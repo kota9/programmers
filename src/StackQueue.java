@@ -7,9 +7,15 @@ public class StackQueue {
         StackQueue sq = new StackQueue();
 
         // 같은 숫자는 싫어
-        int[] arr = {1, 1, 3, 3, 0, 1, 1};
-        int[] ret = sq.solution(arr);
-        System.out.println(Arrays.toString(ret));
+//        int[] arr = {1, 1, 3, 3, 0, 1, 1};
+//        int[] ret = sq.solution(arr);
+//        System.out.println(Arrays.toString(ret));
+
+        // 기능개발
+        int[] progresses = {93, 30, 55};
+        int[] speeds = {1, 30, 5};
+        int[] ret = sq.solution2(progresses, speeds);
+        System.out.println(Arrays.toString(speeds));
 
     }
 
@@ -55,6 +61,16 @@ public class StackQueue {
             answer[i] = list.get(i);
         }
 
+        return answer;
+    }
+
+    // 기능개발
+    public int[] solution2(int[] progresses, int[] speeds) {
+        // 각 작업별 소요일 계산
+
+
+
+        int[] answer = {};
         return answer;
     }
 
