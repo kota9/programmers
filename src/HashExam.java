@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // 해시 문제
@@ -17,9 +14,9 @@ public class HashExam {
 //        System.out.println(he.solution(participant, completion));
 
         // 폰켓몬
-        int[] nums = new int[]{3,1,2,3};
+//        int[] nums = new int[]{3,1,2,3};
 //        int[] nums = new int[]{3,3,3,2,2,4};
-//        int[] nums = new int[]{3,3,3,2,2,2};
+        int[] nums = new int[]{3,3,3,2,2,2};
         System.out.println(he.solution2(nums));
 
 
@@ -63,15 +60,14 @@ public class HashExam {
     // 폰켓몬
     public int solution2(int[] nums) {
         int answer = 0;
+
+        /*// 내 풀이
         int maxCount = nums.length / 2;
 
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
-
-//        System.out.println(map);
-//        System.out.println(maxCount);
 
         // Value 기준 오름차순 정렬
         List<Map.Entry<Integer, Integer>> sortedList = map.entrySet()
@@ -80,14 +76,25 @@ public class HashExam {
                 .collect(Collectors.toList());
 
         for (Map.Entry<Integer, Integer> entry : sortedList) {
-//            System.out.println(entry.getKey() + " " + entry.getValue());
             answer++;
             if (answer == maxCount) {
                 break;
             }
+        }*/
+
+        // 추천 풀이
+        HashSet<Integer> hs = new HashSet<>();
+
+        for (int num : nums) {
+            hs.add(num);
         }
-//        System.out.println(answer);
-//        System.out.println(sortedList);
+
+        // 해시셋의 사이즈와 가져갈수 있는 최대 카운트를 비교해서 작은 값을 리턴한다.
+        if (hs.size() > nums.length / 2) {
+            answer = nums.length / 2;
+        } else {
+            answer = hs.size();
+        }
 
         return answer;
     }
