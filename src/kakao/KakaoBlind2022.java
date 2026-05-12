@@ -20,48 +20,30 @@ public class KakaoBlind2022 {
 
     // 신고 결과 받기
     public int[] solution(String[] id_list, String[] report, int k) {
-        // 아이디별 신고 리스트
+        // 정답을 담을 배열 (자바에서 int 배열은 자동으로 0으로 초기화됨)
+        int[] answer = new int[id_list.length];
+
+        // 1. 유저 ID별 인덱스를 저장하는 Map 생성 (배열에 바로 접근하기 위함)
+        Map<String, Integer> idIdxMap = new HashMap<>();
+        for (int i = 0; i < id_list.length; i++) {
+            idIdxMap.put(id_list[i], i);
+        }
+
+        // 2. [신고당한 유저 -> 신고한 유저들의 Set] 만들기
         Map<String, Set<String>> reportMap = new HashMap<>();
-        Map<String, Set<String>> myReport = new HashMap<>();
         for (String r : report) {
             String[] str = r.split(" ");
-            String reporter = str[0];
-            String suspect = str[1];
-
-            // 이 아이디를 신고한 사람 리스트
-            reportMap.computeIfAbsent(suspect, key -> new HashSet<>()).add(reporter);
-
-            // 내가 신고한 아이디 리스트
-            myReport.computeIfAbsent(reporter, key -> new HashSet<>()).add(suspect);
+            // str[1]: 신고당한 사람, str[0]: 신고한 사람
+            reportMap.computeIfAbsent(str[1], key -> new HashSet<>()).add(str[0]);
         }
 
-        // 정지된 아이디 리스트
-        Set<String> blockSet = new HashSet<>();
-
-        for (Map.Entry<String, Set<String>> entry : reportMap.entrySet()) {
-            // 리스트의 크기가 k 이상인지 확인
-            if (entry.getValue().size() >= k) {
-                blockSet.add(entry.getKey());
-            }
-        }
-
-        // 아이디별 메일을 받는 횟수
-        Map<String, Integer> mailMap = new HashMap<>();
-        for (String s : id_list) {
-            // 먼저 이 유저(s)의 메일 횟수를 기본값 0으로 세팅
-            // (아무도 신고하지 않았거나, 정지된 사람을 신고하지 않았을 때를 대비)
-            mailMap.put(s, 0);
-
-            for (String m : myReport.getOrDefault(s, Collections.emptySet())) {
-                if (blockSet.contains(m)) {
-                    mailMap.put(s, mailMap.getOrDefault(s, 0) + 1);
+        // 3. 메일 발송 로직 처리
+        for (Set<String> reporters : reportMap.values()) {
+            if (reporters.size() >= k) {
+                for (String reporter : reporters) {
+                    answer[idIdxMap.get(reporter)]++;
                 }
             }
-        }
-
-        int[] answer = new int[id_list.length];
-        for (int i = 0; i < id_list.length ; i++) {
-            answer[i] = mailMap.get(id_list[i]);
         }
 
         return answer;
