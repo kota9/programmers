@@ -10,12 +10,19 @@ public class StackQueue {
 //        System.out.println(Arrays.toString(ret));
 
         // 기능개발
-        int[] progresses = {93, 30, 55};
-        int[] speeds = {1, 30, 5};
+//        int[] progresses = {93, 30, 55};
+//        int[] speeds = {1, 30, 5};
 //        int[] progresses = {95, 90, 99, 99, 80, 99};
 //        int[] speeds = {1, 1, 1, 1, 1, 1};
-        int[] ret = sq.solution2(progresses, speeds);
-        System.out.println(Arrays.toString(ret));
+//        int[] ret = sq.solution2(progresses, speeds);
+//        System.out.println(Arrays.toString(ret));
+
+        // 올바른 괄호
+        String s = "()()";
+//        String s = "(())()";
+//        String s = ")()(";
+//        String s = "(()(";
+        System.out.println(sq.solution3(s));
 
     }
 
@@ -118,6 +125,38 @@ public class StackQueue {
 
         for (int i = 0; i < answer.length; i++) {
             answer[i] = answerList.get(i);
+        }
+
+        return answer;
+    }
+
+    // 올바른 괄호
+    public boolean solution3(String s) {
+        boolean answer = true;
+
+        // 내 풀이
+        char[] arr = s.toCharArray();
+
+        if (arr[0] == ')') {
+            answer = false;
+        }
+
+        Stack stack = new Stack<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i]==('(')) {
+                stack.push(arr[i]);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                } else {
+                    stack.pop();
+                }
+            }
+        }
+
+        if (!stack.isEmpty()) {
+            answer = false;
         }
 
         return answer;
