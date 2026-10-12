@@ -5,7 +5,7 @@ import java.util.Queue;
 // BFS: Breadth-First Search, 너비 우선 탐색
 public class DfsBfs {
 
-    // 게임 맵 최단거리
+    // 게임 맵 최단거리. BFS.
     public int findShortestDistanceInGameMap(int[][] maps) {
         // 맵 길이
         int n = maps.length;
@@ -61,5 +61,30 @@ public class DfsBfs {
 
         // 도착할 수 없는 경우
         return -1;
+    }
+
+    // 네트워크. DFS
+    public int countConnectedNetworks(int n, int[][] computers) {
+        boolean[] visited = new boolean[n];
+        int networkCount = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (!visited[i]) {
+                networkCount++;
+                exploreNetworkDepthFirst(i, computers, visited, n);
+            }
+        }
+
+        return networkCount;
+    }
+
+    private void exploreNetworkDepthFirst(int current, int[][] computers, boolean[] visited, int n) {
+        visited[current] = true;
+
+        for (int next = 0; next < n; next++) {
+            if (computers[current][next] == 1 && !visited[next]) {
+                exploreNetworkDepthFirst(next, computers, visited, n);
+            }
+        }
     }
 }

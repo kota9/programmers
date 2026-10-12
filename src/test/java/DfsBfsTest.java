@@ -34,4 +34,31 @@ class DfsBfsTest {
     void returnsOneWhenStartIsDestination() {
         assertEquals(1, dfsBfs.findShortestDistanceInGameMap(new int[][]{{1}}));
     }
+
+    @Test
+    void countsSeparateComputerNetworks() {
+        int[][] computers = {
+                {1, 1, 0},
+                {1, 1, 0},
+                {0, 0, 1}
+        };
+
+        assertEquals(2, dfsBfs.countConnectedNetworks(3, computers));
+    }
+
+    @Test
+    void countsAllConnectedComputersAsOneNetwork() {
+        int[][] computers = {
+                {1, 1, 0},
+                {1, 1, 1},
+                {0, 1, 1}
+        };
+
+        assertEquals(1, dfsBfs.countConnectedNetworks(3, computers));
+    }
+
+    @Test
+    void countsSingleComputerAsOneNetwork() {
+        assertEquals(1, dfsBfs.countConnectedNetworks(1, new int[][]{{1}}));
+    }
 }
