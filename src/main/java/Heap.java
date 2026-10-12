@@ -1,18 +1,8 @@
 import java.util.PriorityQueue;
 
 public class Heap {
-    public static void main(String[] args) {
-        Heap heap = new Heap();
-
-        // 더 맵게
-        int[] scoville = {1, 2, 3, 9, 10, 12};
-        int K = 7;
-        System.out.println(heap.solution(scoville, K));
-
-    }
-
     // 더 맵게
-    public int solution(int[] scoville, int K) {
+    public int minimumMixesToReachTarget(int[] scoville, int K) {
         int answer = 0;
 
         PriorityQueue<Integer> pq = new PriorityQueue<>();

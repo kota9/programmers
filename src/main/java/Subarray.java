@@ -1,31 +1,4 @@
-public class Level3 {
-    public static void main(String[] args) {
-        Level3 level3 = new Level3();
-
-        // 카데인 알고리즘
-//        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-//        int result = maxSubArray(nums);
-//        System.out.println("배열: [-2, 1, -3, 4, -1, 2, 1, -5, 4]");
-//        System.out.println("연속된 부분 배열의 최대 합: " + result);
-//         출력 결과는 6이 됩니다. (부분 배열: [4, -1, 2, 1])
-
-        // 카데인 알고리즘 변형
-        // 연속 펄스 부분 수열의 합
-//        int[] sequence = {2, 3, -6, 1, 3, -1, 2, 4};
-//        System.out.println(level3.continuousPulse(sequence));
-
-        // 길이가 '정확히 K'인 경우 (슬라이딩 윈도우)
-        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        int k = 3;
-        System.out.println("정확히 K=" + k + "인 부분 배열의 최대 합: " + maxSubArrayExactK(nums, k));
-//        출력: 5 (부분 배열: [4, -1, 2])
-
-        // 길이가 'K 이상'인 경우 (카데인 알고리즘 + 슬라이딩 윈도우)
-        System.out.println("최소 K=" + k + " 이상인 부분 배열의 최대 합: " + maxSubArrayAtLeastK(nums, k));
-//        출력: 6 (부분 배열: [4, -1, 2, 1])
-
-    }
-
+public class Subarray {
     // 카데인 알고리즘
     /**
      * 연속된 부분 배열의 최대 합을 반환하는 메서드

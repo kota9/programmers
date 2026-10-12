@@ -1,33 +1,8 @@
 import java.util.*;
 
 public class StackQueue {
-    public static void main(String[] args) {
-        StackQueue sq = new StackQueue();
-
-        // 같은 숫자는 싫어
-//        int[] arr = {1, 1, 3, 3, 0, 1, 1};
-//        int[] ret = sq.solution(arr);
-//        System.out.println(Arrays.toString(ret));
-
-        // 기능개발
-//        int[] progresses = {93, 30, 55};
-//        int[] speeds = {1, 30, 5};
-//        int[] progresses = {95, 90, 99, 99, 80, 99};
-//        int[] speeds = {1, 1, 1, 1, 1, 1};
-//        int[] ret = sq.solution2(progresses, speeds);
-//        System.out.println(Arrays.toString(ret));
-
-        // 올바른 괄호
-        String s = "()()";
-//        String s = "(())()";
-//        String s = ")()(";
-//        String s = "(()(";
-        System.out.println(sq.solution3(s));
-
-    }
-
     // 같은 숫자는 싫어
-    public int[] solution(int[] arr) {
+    public int[] removeAdjacentDuplicates(int[] arr) {
         /*
         스택으로 풀 경우 효율성에서 실패했다.
         Stack<Integer> st = new Stack<>();
@@ -72,7 +47,7 @@ public class StackQueue {
     }
 
     // 기능개발
-    public int[] solution2(int[] progresses, int[] speeds) {
+    public int[] countFeatureDeployments(int[] progresses, int[] speeds) {
         /*// 내 풀이
         // 각 작업별 소요일 계산
         int[] remain = new int[progresses.length];
@@ -131,7 +106,7 @@ public class StackQueue {
     }
 
     // 올바른 괄호
-    public boolean solution3(String s) {
+    public boolean hasValidParentheses(String s) {
         boolean answer = true;
 
         // 내 풀이
@@ -141,7 +116,7 @@ public class StackQueue {
             answer = false;
         }
 
-        Stack stack = new Stack<>();
+        Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < arr.length; i++) {
             if (arr[i]==('(')) {

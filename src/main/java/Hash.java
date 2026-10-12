@@ -2,27 +2,8 @@ import java.util.*;
 
 // 해시 문제
 public class Hash {
-    public static void main(String[] args) {
-        Hash hash = new Hash();
-
-        // 완주하지 못한 선수
-//        String[] participant = new String[]{"leo", "kiki", "eden"};
-//        String[] completion = new String[]{"kiki", "eden"};
-//        String[] participant = new String[]{"mislav", "stanko", "mislav", "ana"};
-//        String[] completion = new String[]{"stanko", "ana", "mislav"};
-//        System.out.println(hash.solution(participant, completion));
-
-        // 폰켓몬
-//        int[] nums = new int[]{3,1,2,3};
-//        int[] nums = new int[]{3,3,3,2,2,4};
-        int[] nums = new int[]{3,3,3,2,2,2};
-        System.out.println(hash.solution2(nums));
-
-
-    }
-
     // 완주하지 못한 선수
-    public String solution(String[] participant, String[] completion) {
+    public String findUnfinishedParticipant(String[] participant, String[] completion) {
         String answer = "";
 
         HashMap<String, Integer> map = new HashMap<>();
@@ -57,7 +38,7 @@ public class Hash {
     }
 
     // 폰켓몬
-    public int solution2(int[] nums) {
+    public int maxPokemonKinds(int[] nums) {
         int answer = 0;
 
         /*// 내 풀이
