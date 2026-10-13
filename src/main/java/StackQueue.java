@@ -137,4 +137,36 @@ public class StackQueue {
         return answer;
     }
 
+    // 택배상자
+    public int countDeliverableBoxes(int[] order) {
+        /*order[i]가 나올때까지 스택에 데이터 쌓기
+        i와 box가 일치하면 answer++
+        일치하지 않는다면 스택에 데이터 쌓기
+        스택에서 데이터를 꺼내서 i와 일치하면 answer++*/
+
+        // 실은 택배 수
+        int answer = 0;
+
+        // 보조 컨테이너
+        Deque<Integer> container = new ArrayDeque<>();
+
+        // 돌아가는 컨테이너
+        for (int box = 1; box <= order.length; box++) {
+            if (box == order[answer]) {
+                answer++;
+            } else {
+                container.push(box);
+            }
+
+            // 보조 컨테이너에서 박스 찾기
+            while (!container.isEmpty() && order[answer] == container.peek()) {
+                answer++;
+                container.pop();
+            }
+
+        }
+
+        return answer;
+    }
+
 }

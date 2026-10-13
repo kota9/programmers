@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StackQueueTest {
 
@@ -29,5 +27,11 @@ class StackQueueTest {
     void rejectsUnbalancedParentheses() {
         assertFalse(stackQueue.hasValidParentheses(")()("));
         assertFalse(stackQueue.hasValidParentheses("(()("));
+    }
+
+    @Test
+    void solution() {
+        assertEquals(2, stackQueue.countDeliverableBoxes(new int[]{4, 3, 1, 2, 5}));
+        assertEquals(5, stackQueue.countDeliverableBoxes(new int[]{5, 4, 3, 2, 1}));
     }
 }
