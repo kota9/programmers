@@ -30,8 +30,19 @@ class StackQueueTest {
     }
 
     @Test
-    void solution() {
+    void countDeliverableBoxes() {
         assertEquals(2, stackQueue.countDeliverableBoxes(new int[]{4, 3, 1, 2, 5}));
         assertEquals(5, stackQueue.countDeliverableBoxes(new int[]{5, 4, 3, 2, 1}));
     }
+
+    @Test
+    void calculateMinimumRoomCount() {
+        assertEquals(3, stackQueue.calculateMinimumRoomCount(new String[][]{
+                {"15:00", "17:00"}, {"16:40", "18:20"}, {"14:20", "15:20"}, {"14:10", "19:20"}, {"18:20", "21:20"}
+        }));
+        assertEquals(3, stackQueue.calculateMinimumRoomCountByChatGPT(new String[][]{
+                {"15:00", "17:00"}, {"16:40", "18:20"}, {"14:20", "15:20"}, {"14:10", "19:20"}, {"18:20", "21:20"}
+        }));
+    }
+
 }

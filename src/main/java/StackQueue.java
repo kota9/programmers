@@ -169,4 +169,83 @@ public class StackQueue {
         return boxCount;
     }
 
+    // 호텔 대실
+    public int calculateMinimumRoomCount(String[][] book_time) {
+        // 방 개수
+        int roomCount = 0;
+
+        // 예약 시간순으로 정렬
+        Arrays.sort(book_time, (a, b) -> a[0].compareTo(b[0]));
+
+        // 예약 시간을 큐에 저장
+        Queue<int[]> queue = new ArrayDeque<>();
+        for (String[] time : book_time) {
+            // 예약 종료 시간에 청소시간(10분을 추가)
+            // 예약시간을 분으로 변환
+            String startTime = time[0];
+            String endTime = time[1];
+
+            String[] sTime = startTime.split(":");
+            String[] eTime = endTime.split(":");
+            int startMinute = Integer.parseInt(sTime[0]) * 60 + Integer.parseInt(sTime[1]);
+            int endMinute = Integer.parseInt(eTime[0]) * 60 + Integer.parseInt(eTime[1]) + 10;
+
+            int[] newTime = {startMinute, endMinute};
+            queue.offer(newTime);
+        }
+
+        // 방에 첫번째 예약이면 방 개수를 +1
+        // 방에 더 이상 예약할 수 없으면 방 개수를 추가
+        while (!queue.isEmpty()) {
+            int[] currentReservation = queue.poll();
+            roomCount++;
+
+            int queueSize = queue.size();
+            for (int i = 0; i < queueSize; i++) {
+                int[] nextReservation = queue.poll();
+                if (currentReservation[1] <= nextReservation[0]) {
+                    currentReservation = nextReservation;
+                } else {
+                    queue.offer(nextReservation);
+                }
+            }
+        }
+
+        return roomCount;
+    }
+
+    // 호텔 대실 by ChatGPT
+    public int calculateMinimumRoomCountByChatGPT(String[][] book_time) {
+        Arrays.sort(book_time, (a, b) -> a[0].compareTo(b[0]));
+
+        // 객실별 사용 가능 시각을 저장하는 최소 힙
+        PriorityQueue<Integer> endTimes = new PriorityQueue<>();
+
+        int maxRooms = 0;
+
+        for (String[] time : book_time) {
+            int startMinute = toMinutes(time[0]);
+            int endMinute = toMinutes(time[1]) + 10;
+
+            // 현재 예약 시작 전에 사용 가능한 객실 제거
+            while (!endTimes.isEmpty()
+                    && endTimes.peek() <= startMinute) {
+                endTimes.poll();
+            }
+
+            // 현재 예약을 객실에 배정
+            endTimes.offer(endMinute);
+
+            maxRooms = Math.max(maxRooms, endTimes.size());
+        }
+
+        return maxRooms;
+    }
+
+    private int toMinutes(String time) {
+        String[] parts = time.split(":");
+
+        return Integer.parseInt(parts[0]) * 60 + Integer.parseInt(parts[1]);
+    }
+
 }
