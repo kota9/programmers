@@ -1,5 +1,4 @@
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.*;
 
 // DFS: Depth-First Search, 깊이 우선 탐색
 // BFS: Breadth-First Search, 너비 우선 탐색
@@ -118,6 +117,73 @@ public class DfsBfs {
         }
 
         return maxCount;
+    }
+
+    // 전력망을 둘로 나누기
+    public int findMinimumTowerDifference(int n, int[][] wires) {
+        // 송전탑 간 연결 관계를 저장하는 인접 리스트
+        List<Integer>[] graph = new ArrayList[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        // 양방향으로 연결 관계 저장
+        for (int[] wire : wires) {
+            int a = wire[0];
+            int b = wire[1];
+
+            graph[a].add(b);
+            graph[b].add(a);
+        }
+
+        int answer = n;
+
+        // 전선을 하나씩 끊어 보는 경우
+        for (int[] wire : wires) {
+            int a = wire[0];
+            int b = wire[1];
+
+            boolean[] visited = new boolean[n + 1];
+
+            // 해당 전선을 제외하고 한쪽 네트워크의 송전탑 수 계산
+            int count = countConnectedTowersWithoutWire(a, a, b, graph, visited);
+
+            // 반대쪽 네트워크의 송전탑 수
+            int otherCount = n - count;
+
+            int difference = Math.abs(count-otherCount);
+
+            answer = Math.min(answer, difference);
+        }
+
+        return answer;
+    }
+
+    public int countConnectedTowersWithoutWire(int current, int cutA, int cutB, List<Integer>[] graph, boolean[] visited) {
+        // 1. 현재 송전탑 방문 처리
+        visited[current] = true;
+
+        // 2. 현재 송전탑 자신을 1개로 계산
+        int count = 1;
+
+        // 3. 현재 송전탑과 연결된 송전탑 확인
+        for (int next : graph[current]) {
+
+            // 4. 끊은 전선이면 건너뛰기
+            if ((current == cutA && next == cutB)
+                    || (current == cutB && next == cutA)) {
+                continue;
+            }
+
+            // 5. 방문하지 않은 송전탑으로 이동하고 개수 누적
+            if (!visited[next]) {
+                count += countConnectedTowersWithoutWire(next, cutA, cutB, graph, visited);
+            }
+        }
+
+        // 6. 현재 송전탑에서 도달 가능한 송전탑 수 반환
+        return count;
     }
 
 }
