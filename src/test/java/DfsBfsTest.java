@@ -61,4 +61,42 @@ class DfsBfsTest {
     void countsSingleComputerAsOneNetwork() {
         assertEquals(1, dfsBfs.countConnectedNetworks(1, new int[][]{{1}}));
     }
+
+    @Test
+    void findsMaximumNumberOfDungeonsForStandardExample() {
+        int[][] dungeons = {
+                {80, 20},
+                {50, 40},
+                {30, 10}
+        };
+
+        assertEquals(3, dfsBfs.findMaximumDungeonCount(80, dungeons));
+    }
+
+    @Test
+    void returnsZeroWhenFatigueIsTooLowForEveryDungeon() {
+        int[][] dungeons = {
+                {80, 20},
+                {50, 40}
+        };
+
+        assertEquals(0, dfsBfs.findMaximumDungeonCount(10, dungeons));
+    }
+
+    @Test
+    void returnsZeroWhenThereAreNoDungeons() {
+        assertEquals(0, dfsBfs.findMaximumDungeonCount(80, new int[0][2]));
+    }
+
+    @Test
+    void doesNotReuseDungeonSearchStateAcrossCalls() {
+        int[][] dungeons = {
+                {80, 20},
+                {50, 40},
+                {30, 10}
+        };
+
+        assertEquals(3, dfsBfs.findMaximumDungeonCount(80, dungeons));
+        assertEquals(0, dfsBfs.findMaximumDungeonCount(10, dungeons));
+    }
 }

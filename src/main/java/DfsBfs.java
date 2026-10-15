@@ -87,4 +87,37 @@ public class DfsBfs {
             }
         }
     }
+
+    public int findMaximumDungeonCount(int k, int[][] dungeons) {
+        return searchDungeonPathsDepthFirst(k, dungeons, new boolean[dungeons.length]);
+    }
+
+    private int searchDungeonPathsDepthFirst(int fatigue, int[][] dungeons, boolean[] visited) {
+        int maxCount = 0;
+
+        for (int i = 0; i < dungeons.length; i++) {
+            // 이미 방문한 던전은 제외
+            if (visited[i]) {
+                continue;
+            }
+
+            if (fatigue < dungeons[i][0]) {
+                continue;
+            }
+
+            // 현재 던전 방문
+            visited[i] = true;
+
+            // 던전 탐험 후 다음 던전 탐색
+            int exploredCount = 1 + searchDungeonPathsDepthFirst(
+                    fatigue - dungeons[i][1], dungeons, visited);
+            maxCount = Math.max(maxCount, exploredCount);
+
+            // 다른 방문 순서를 탐색하기 위해 방문 상태 복구
+            visited[i] = false;
+        }
+
+        return maxCount;
+    }
+
 }
