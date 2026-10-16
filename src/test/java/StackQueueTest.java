@@ -45,4 +45,11 @@ class StackQueueTest {
         }));
     }
 
+    @Test
+    void findsPrintOrderByPriorityAndOriginalLocation() {
+        assertEquals(1, stackQueue.findPrintOrder(new int[]{2, 1, 3, 2}, 2));
+        assertEquals(5, stackQueue.findPrintOrder(new int[]{1, 1, 9, 1, 1, 1}, 0));
+        assertEquals(1, stackQueue.findPrintOrder(new int[]{2, 3, 3}, 1));
+    }
+
 }
